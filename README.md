@@ -8,7 +8,7 @@ envoy started by nomad using raw_exec driver
                                         ###############
                                         #             #
                                         #             #
-   `curl -sL http://192.168.56.71:9090` -->   ENVOY   #
+ `curl -sL http://192.168.56.71:9090` -->   ENVOY     #
                                         #             #
                                         # VM          #
                                         ###############
@@ -64,10 +64,39 @@ Destroy the LAB
 vagrant destroy -f
 ```
 
+# Nomad Job Spec: ENVOY
+```
+job "envoy" {
+  datacenters = ["dc1"]
+  task "envoy" {
+    driver = "raw_exec"
+
+    template {
+      destination = "envoy_config.yml"
+      data = file ("./envoy_config.yml")
+    }
+
+    artifact {
+    source = "https://archive.tetratelabs.io/envoy/download/v1.20.0/envoy-v1.20.0-linux-amd64.tar.xz"
+    }
+
+    config {
+      command = "/bin/bash"
+      args    = ["-c", "local/envoy-v1.20.0-linux-amd64/bin/envoy -c ./envoy_config.yml" ]
+    }
+
+    resources {
+      cpu = 250
+      memory = 128
+    }
+  }
+}
+```
+
 # Caveats
-Nomad binary is running using the nomad user.
-If for example envoy is started using standard ubuntu user (not using nomad), the envoy will create /dev/shm/envoy_shared_memory_0.
-Next if envoy process (using ubuntu user) is stopped and right after the nomad envoy job is started it will fail.
+Nomad binary is running using the nomad user.\
+If for example envoy is started using standard ubuntu user (not using nomad), the envoy will create /dev/shm/envoy_shared_memory_0.\
+Next if envoy process (using ubuntu user) is stopped and right after the nomad envoy job is started it will fail.\
 Workaround: delete manually the file using:
 ```
 rm /dev/shm/envoy_shared_memory_0
