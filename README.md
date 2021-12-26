@@ -96,12 +96,10 @@ job "envoy" {
 # Caveats
 Nomad binary is running using the nomad user.\
 
-If for example envoy is started using standard ubuntu user (not using nomad), the envoy will create a file in /dev/shm.\
+If for example envoy is started using standard ubuntu user (not using nomad), the envoy will create a file in /dev/shm.
+
+Note the user and group:
 ```
-ls -l /dev/shm/envoy_shared_memory_0 
-```
-```
-# output
 $ ls -l /dev/shm/envoy_shared_memory_0 
 -rw------- 1 ubuntu ubuntu 104 Dec 26 23:44 /dev/shm/envoy_shared_memory_0
 ```
