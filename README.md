@@ -95,11 +95,22 @@ job "envoy" {
 
 # Caveats
 Nomad binary is running using the nomad user.\
-If for example envoy is started using standard ubuntu user (not using nomad), the envoy will create /dev/shm/envoy_shared_memory_0.\
+
+If for example envoy is started using standard ubuntu user (not using nomad), the envoy will create a file in /dev/shm.\
+```
+ls -l /dev/shm/envoy_shared_memory_0 
+```
+```
+# output
+$ ls -l /dev/shm/envoy_shared_memory_0 
+-rw------- 1 ubuntu ubuntu 104 Dec 26 23:44 /dev/shm/envoy_shared_memory_0
+```
+
 Next if envoy process (using ubuntu user) is stopped and right after the nomad envoy job is started it will fail.\
+
 Workaround: delete manually the file using:
 ```
-rm /dev/shm/envoy_shared_memory_0
+sudo rm /dev/shm/envoy_shared_memory_0
 ```
 
 See also [LINK](https://github.com/envoyproxy/envoy/issues/4195)
