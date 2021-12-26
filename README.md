@@ -13,7 +13,7 @@ envoy started by nomad using raw_exec driver
                                         # VM          #
                                         ###############
                                                     
-                                                                                                                                       
+ 
 ```
 
 # How to use this repo
@@ -102,7 +102,7 @@ Workaround: delete manually the file using:
 rm /dev/shm/envoy_shared_memory_0
 ```
 
-See also [LINK](https://github.com/envoyproxy/envoy/issues/4195 sudo rm /dev/shm/envoy_shared_memory_0)
+See also [LINK](https://github.com/envoyproxy/envoy/issues/4195)
 
 # Sample output
 ```
