@@ -65,6 +65,7 @@ vagrant destroy -f
 ```
 
 # Nomad Job Spec: ENVOY
+raw_exec driver must be activated to be able to run this job.
 ```
 job "envoy" {
   datacenters = ["dc1"]
