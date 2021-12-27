@@ -1,5 +1,5 @@
 # nomad_raw_exec_envoy
-envoy started by nomad using raw_exec driver
+envoy started by nomad using raw_exec driver (using Vagrant)
 
 # Topology
 ```
@@ -10,10 +10,10 @@ envoy started by nomad using raw_exec driver
                                         #             #
  `curl -sL http://192.168.56.71:9090` -->   ENVOY     #
                                         #             #
-                                        # VM          #
+                                        # VM(Vagrant) #
                                         ###############
                                                     
- 
+
 ```
 
 # How to use this repo
