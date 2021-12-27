@@ -108,7 +108,7 @@ $ ls -l /dev/shm/envoy_shared_memory_0
 Next if envoy process (using ubuntu user) is stopped and right after the nomad envoy job is started it will fail.\
 
 ### Workaround:
-Delete manually the file using:
+Delete the file manually the (will be created again by the new nomad user):
 ```
 sudo rm /dev/shm/envoy_shared_memory_0
 ```
